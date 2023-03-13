@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container"></div>
+    <script>
+        let jsonGlobal={
+            Titles : ['排名','公司','國別','市占率%'],
+            Country :[
+                {ranking:1,company:'台積電',country:'台灣',marketShare:53.1},
+                {ranking:2,company:'三星電子',country:'韓國',marketShare:17.3},
+                {ranking:3,company:'聯電',country:'台灣',marketShare:7.2},
+                {ranking:4,company:'格羅方德',country:'美國',marketShare:6.1},
+                {ranking:5,company:'中芯國際',country:'中國',marketShare:5.3},
+                {ranking:6,company:'華虹半導體',country:'中國',marketShare:2.6},
+                {ranking:7,company:'力積電',country:'台灣',marketShare:1.8},
+                {ranking:8,company:'世界先進',country:'台灣',marketShare:1.4},
+                {ranking:9,company:'高塔半導體',country:'以色列',marketShare:1.4},
+                {ranking:10,company:'東部高科',country:'南韓',marketShare:1},
+            ]    
+        };
+    </script>
+    <script>
+        //建立HTML元素
+        let container = document.createElement('container');
+        let table = document.createElement('table');
+        table.setAttribute("class", "tableHw");
+        let thead = document.createElement('thead');
+        let tbody = document.createElement('tbody');
+
+        //顯示
+        window.onload = function(){
+            //取得Titles的value，代入createTable函式
+            createTable(jsonGlobal.Titles);
+            //並回傳table做<body>的子物件
+            document.body.appendChild(table);
+        };
+
+        //thead及tbody架構
+        function createTable(Titles, rowArray){
+            //呼叫thead資料
+            addRow(thead, Titles);
+
+            //呼叫tbody資料
+            rowArray.forEach(function(row) {
+                if(Array.isArray(row)){
+                    addRow(tbody, row);
+                }
+            });
+        }
+
+        //thead及tbody資料內容
+        function addRow(target, rowData){
+            //建立tbody架構
+            let _row = document.createElement('tr');
+
+            rowData.forEach(function(item){
+                let td = document.createElement('td');
+                let tdText = document.createElement(item);
+                td.appendChild(item);
+                _row.appendChild(td);
+
+            });
+
+            target.appendChild(_row);
+            table.appendChild(target);
+
+        }
+    </script>
+</body>
+</html>
